@@ -12,6 +12,7 @@ RUN apk fix && \
 RUN pip install PyYaml==5.3.1
 RUN pip install git+https://github.com/akretion/ak
 
+RUN ls -la
 COPY repos.yml /root/.config/git-autoshare/repos.yml
 RUN pip install git-autoshare git-aggregator
 COPY bin/* /usr/local/bin/
