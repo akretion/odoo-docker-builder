@@ -2,6 +2,9 @@
 set -e
 cd /odoo
 
+git config --global user.email "bot@akretion.com"
+git config --global user.name "Bot"
+
 ak build -j1 -c odoo-spec.yaml -f odoo-frozen.yaml
 echo "AK BUILD DONE"
 # Clean useless file
