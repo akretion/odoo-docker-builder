@@ -16,4 +16,6 @@ COPY repos.yml /root/.config/git-autoshare/repos.yml
 RUN pip install git-autoshare git-aggregator
 COPY bin/* /usr/local/bin/
 ADD https://api.github.com/repos/odoo/odoo/git/refs/heads/14.0 version.json
-RUN /usr/local/bin/git clone https://github.com/odoo/odoo.git -b 14.0 --bare --single-branch
+RUN mkdir -p /root/.cache/git-autoshare/github.com/odoo && \
+    /usr/bin/git init --bare && \
+    git fetch https://github.com/odoo/odoo.git refs/heads/14.0:refs/git-autoshare/odoo/heads/14.0
