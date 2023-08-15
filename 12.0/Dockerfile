@@ -18,9 +18,9 @@ COPY bin/* /usr/local/bin/
 COPY install/* /install/
 
 # pre-fetch the git-autoshare cache with the bare minimum:
-ADD https://api.github.com/repos/odoo/odoo/git/refs/heads/14.0 version.json
+ADD https://api.github.com/repos/odoo/odoo/git/refs/heads/12.0 version.json
 RUN mkdir -p /root/.cache/git-autoshare/github.com/odoo && \
     cd /root/.cache/git-autoshare/github.com/odoo && \
     /usr/bin/git init --bare && \
-    /usr/bin/git fetch https://github.com/OCA/OCB.git refs/heads/14.0:refs/git-autoshare/oca/heads/14.0 --shallow-since=2020-10-01 && \
-    /usr/bin/git fetch https://github.com/odoo/odoo.git refs/heads/14.0:refs/git-autoshare/odoo/heads/14.0 --shallow-since=2020-10-01
+    /usr/bin/git fetch https://github.com/OCA/OCB.git refs/heads/12.0:refs/git-autoshare/oca/heads/12.0 --shallow-since=2018-10-01 && \
+    /usr/bin/git fetch https://github.com/odoo/odoo.git refs/heads/12.0:refs/git-autoshare/odoo/heads/12.0 --shallow-since=2018-10-01

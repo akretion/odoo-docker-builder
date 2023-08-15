@@ -13,7 +13,12 @@ jobs:
     strategy:
       matrix:
         include:
+          - ODOOVERSION: "12.0"
+          - ODOOVERSION: "13.0"
           - ODOOVERSION: "14.0"
+          - ODOOVERSION: "15.0"
+          - ODOOVERSION: "16.0"
+
     steps:
       - uses: actions/checkout@v2
       - name: Set up Docker Buildx
