@@ -15,6 +15,9 @@ RUN pip install git+https://github.com/akretion/ak
 COPY repos.yml /root/.config/git-autoshare/repos.yml
 RUN pip install git-autoshare git-aggregator
 COPY bin/* /usr/local/bin/
+COPY install/* /install/
+
+# pre-fetch the git-autoshare cache with the bare minimum:
 ADD https://api.github.com/repos/odoo/odoo/git/refs/heads/14.0 version.json
 RUN mkdir -p /root/.cache/git-autoshare/github.com/odoo && \
     cd /root/.cache/git-autoshare/github.com/odoo && \
