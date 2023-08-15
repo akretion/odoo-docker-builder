@@ -17,5 +17,6 @@ RUN pip install git-autoshare git-aggregator
 COPY bin/* /usr/local/bin/
 ADD https://api.github.com/repos/odoo/odoo/git/refs/heads/14.0 version.json
 RUN mkdir -p /root/.cache/git-autoshare/github.com/odoo && \
+    cd /root/.cache/git-autoshare/github.com/odoo && \
     /usr/bin/git init --bare && \
-    git fetch https://github.com/odoo/odoo.git refs/heads/14.0:refs/git-autoshare/odoo/heads/14.0
+    /usr/bin/git fetch https://github.com/OCA/OCB.git refs/heads/14.0:refs/git-autoshare/oca/heads/14.0 --shallow-since=2021-10-01
