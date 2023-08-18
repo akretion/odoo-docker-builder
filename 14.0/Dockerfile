@@ -15,13 +15,13 @@ RUN pip install git+https://github.com/akretion/ak
 RUN pip install git-aggregator
 COPY install/* /install/
 
-# pre-fetch the git-autoshare cache with the bare minimum:
-# (git-autoshare reference cannot be shallow at all sadly)
+# pre-fetch /odoo/src for CoW git-aggregator convergence atop of it.
 ADD https://api.github.com/repos/odoo/odoo/git/refs/heads/14.0 version.json
 RUN mkdir -p /odoo/src && \
     cd /odoo/src && \
     git init && \
-    git remote add odoo https://github.com/odoo/odoo.git && \
-    git fetch odoo 14.0 --shallow-since=2020-10-01 && \
-    git remote add oca https://github.com/oca/ocb.git && \
-    git fetch oca 14.0 --shallow-since=2020-10-01
+    git remote add odoo https://github.com/odoo/odoo && \
+    git fetch odoo 14.0 --filter=blob:none && \
+    git remote add oca https://github.com/oca/ocb && \
+    git fetch oca 14.0 && \
+    git checkout remotes/oca/14.0
