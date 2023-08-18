@@ -3,7 +3,7 @@
 These auxiliary images are optimized to be used in a multi-stages Docker Odoo build.
 see https://docs.docker.com/build/building/multi-stage/
 
-With traditional Odoo Dockerfiles, every time your base image get security updates (often once a week), all the Docker lines caches are swept and you rebuild the world, downloading 15 years of Odoo git history that weights 5.7 Gb. It can easily take 20 min in the cloud to 1h30 with a bad onsite connection...
+With traditional single stage Odoo Dockerfiles, every time your base image get security updates (often once a week), all the Docker lines caches are swept and you would easily rebuild the world, downloading 15 years of Odoo git history that weights 5.7 Gb. It can easily take 20 min in the cloud to 1h30 with a bad onsite connection...
 
 In these builder base images, we prepare /odoo/src with the proper Odoo serie single branch checkout along the the OCA/OCB backports. You can use it at your Odoo or OCB base and merge any pull requests you need atop of it (don't tell me your Odoo pull requests were merged, I don't believe you).
 
