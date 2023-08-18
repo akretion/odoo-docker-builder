@@ -12,15 +12,16 @@ RUN apk fix && \
 RUN pip install PyYaml==5.3.1
 RUN pip install git+https://github.com/akretion/ak
 
-COPY repos.yml /root/.config/git-autoshare/repos.yml
-RUN pip install git-autoshare git-aggregator
-COPY bin/* /usr/local/bin/
+RUN pip install git-aggregator
 COPY install/* /install/
 
-# pre-fetch the git-autoshare cache with the bare minimum:
+# pre-fetch /odoo/src for CoW git-aggregator convergence atop of it.
 ADD https://api.github.com/repos/odoo/odoo/git/refs/heads/12.0 version.json
-RUN mkdir -p /root/.cache/git-autoshare/github.com/odoo && \
-    cd /root/.cache/git-autoshare/github.com/odoo && \
-    /usr/bin/git init --bare && \
-    /usr/bin/git fetch https://github.com/OCA/OCB.git refs/heads/12.0:refs/git-autoshare/oca/heads/12.0 --shallow-since=2018-10-01 && \
-    /usr/bin/git fetch https://github.com/odoo/odoo.git refs/heads/12.0:refs/git-autoshare/odoo/heads/12.0 --shallow-since=2018-10-01
+RUN mkdir -p /odoo/src && \
+    cd /odoo/src && \
+    git init && \
+    git remote add odoo https://github.com/odoo/odoo && \
+    git fetch odoo 12.0 --filter=blob:none && \
+    git remote add oca https://github.com/oca/ocb && \
+    git fetch oca 12.0 && \
+    git checkout remotes/oca/12.0
